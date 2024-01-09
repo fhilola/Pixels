@@ -34,18 +34,19 @@ const initialState: SearchData = {
 export const SearchSlice = createSlice({
     name: 'search',
     initialState,
-    extraReducers: (buildCreateApi) => {
-        buildCreateApi.addCase(searchFetch.pending, (state, action: PayloadAction<object>) => {
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(searchFetch.pending, (state, action) => {
             state.isloading = true
         }),
-            buildCreateApi.addCase(searchFetch.fulfilled, (state, action: PayloadAction<object>) => {
+            builder.addCase(searchFetch.fulfilled, (state, action) => {
                 console.log(action);
                 state.isloading = false,
                     state.data = action.payload,
                     state.issuccess = true,
                     state.message = 'Successfully searched'
             }),
-            buildCreateApi.addCase(searchFetch.rejected, (state, action: PayloadAction<object>) => {
+            builder.addCase(searchFetch.rejected, (state, action) => {
                 state.isloading = false,
                     state.iserror = true
                 state.issuccess = false,
